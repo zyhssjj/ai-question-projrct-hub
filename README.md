@@ -1,6 +1,14 @@
 # 雨云讲义测验 Agent
 
-面向课程讲义、考研资料和考证资料的 AI 测验平台。用户上传资料后，系统异步完成文本提取、扫描件 OCR 和知识切片；出卷 Agent 通过多轮对话收集题量、题型、难度、范围与时限，生成可直接在线作答的单选/多选试卷，并提供自动判分、讲义引用、错题归档与重练。
+> 面向课程讲义、考研资料和考证资料的资料驱动型 AI 在线测验平台
+
+**Go · React · Gin · GORM · PostgreSQL · pgvector · Supabase Storage · DeepSeek · Poppler · Tesseract**
+
+[![Go](https://img.shields.io/badge/Go-1.25-00ADD8?logo=go&logoColor=white)](week04/homework/server) [![React](https://img.shields.io/badge/React-18-61DAFB?logo=react&logoColor=20232A)](week04/homework/client) [![Gin](https://img.shields.io/badge/Gin-API-00ADD8)](https://gin-gonic.com/) [![PostgreSQL](https://img.shields.io/badge/PostgreSQL-pgvector-4169E1?logo=postgresql&logoColor=white)](https://www.postgresql.org/) [![AI](https://img.shields.io/badge/AI-DeepSeek-111827)](https://www.deepseek.com/)
+
+用户上传资料后，系统异步完成文本提取、扫描件 OCR 和知识切片；出卷 Agent 通过多轮对话收集题量、题型、难度、范围与时限，生成可直接在线作答的单选/多选试卷，并提供自动判分、讲义引用、错题归档与重练。
+
+**面试关键词：** RAG · Agent 工作流 · 结构化输出校验 · 异步任务 Worker · HttpOnly 会话隔离 · 服务端判分 · 对象存储 · OCR
 
 > 仓库中的主要代码位于 `week04/homework`。项目采用匿名浏览器会话隔离学习数据，定位为个人作品和技术验证，不宣称具备生产级账号认证能力。
 
