@@ -6,6 +6,7 @@ export default defineConfig({
   plugins: [react()],
   // 配置开发服务器
   server: {
+    host: true, // 同时监听 localhost 和 127.0.0.1
     port: 5173, // 前端开发服务器端口
     open: true, // 自动打开浏览器
     proxy: {

@@ -1,0 +1,6 @@
+.env
+.gocache/
+.gomodcache/
+question_bank.db
+question_bank.db-shm
+question_bank.db-wal

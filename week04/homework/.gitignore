@@ -1,0 +1,32 @@
+# Secrets and local configuration
+.env
+server/.env
+client/.env
+
+# Local databases and runtime caches
+*.db
+*.db-shm
+*.db-wal
+.gocache/
+.gomodcache/
+tmp/
+output/
+
+# Frontend build artifacts
+client/node_modules/
+client/dist/
+
+# Local diagrams and unrelated generated artifacts
+circular-queue-tutorial.html
+generate_gmp.py
+gmp-diagram.html
+gmp-diagram.png
+grade-chart.html
+process-thread-diagram.html
+
+# IDE and OS files
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+*.log

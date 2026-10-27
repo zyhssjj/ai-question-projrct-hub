@@ -2,10 +2,12 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App.jsx';
 import 'antd/dist/reset.css'; // 引入Ant Design样式重置
+import './styles.css';
 
-// 渲染根组件到页面
-ReactDOM.createRoot(document.getElementById('root')).render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
-);
+if (window.location.hostname === '127.0.0.1') {
+  const canonicalURL = new URL(window.location.href);
+  canonicalURL.hostname = 'localhost';
+  window.location.replace(canonicalURL.toString());
+} else {
+  ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+}

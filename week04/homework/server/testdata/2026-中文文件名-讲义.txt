@@ -1,0 +1,4 @@
+Go concurrency notes for Storage key regression testing.
+
+Goroutines are lightweight execution units scheduled by the Go runtime.
+Channels allow goroutines to communicate safely.

@@ -1,13 +1,35 @@
 import axios from 'axios';
 import { message } from 'antd';
 
+let activeRequests = 0;
+const notifyNetworkActivity = () => {
+  if (typeof window !== 'undefined') {
+    window.dispatchEvent(new CustomEvent('study-network-change', { detail: activeRequests }));
+  }
+};
+const startRequest = (config) => {
+  if (!config.silent) {
+    config.trackActivity = true;
+    activeRequests += 1;
+    notifyNetworkActivity();
+  }
+};
+const finishRequest = (config) => {
+  if (config?.trackActivity) {
+    config.trackActivity = false;
+    activeRequests = Math.max(0, activeRequests - 1);
+    notifyNetworkActivity();
+  }
+};
+
 /**
  * 创建axios实例
  * 作用：统一配置所有HTTP请求
  */
 const service = axios.create({
-  baseURL: '/api', // 基础URL，会被vite代理转发到后端
-  timeout: 30000, // 请求超时时间（30秒）
+  baseURL: import.meta.env.VITE_API_BASE_URL || '/api',
+  withCredentials: true,
+  timeout: 60000,
   headers: {
     'Content-Type': 'application/json', // 请求头类型
   },
@@ -19,6 +41,10 @@ const service = axios.create({
  */
 service.interceptors.request.use(
   (config) => {
+    startRequest(config);
+    if (config.data instanceof FormData) {
+      delete config.headers['Content-Type'];
+    }
     // 可以在这里添加统一的请求头，如token
     // const token = localStorage.getItem('token');
     // if (token) {
@@ -40,6 +66,7 @@ service.interceptors.request.use(
  */
 service.interceptors.response.use(
   (response) => {
+    finishRequest(response.config);
     // 响应成功处理
     const res = response.data;
     
@@ -54,8 +81,12 @@ service.interceptors.response.use(
     return res;
   },
   (error) => {
-    // 响应错误处理
-    console.error('响应错误：', error);
+    finishRequest(error.config);
+    if (error.config?.silent) {
+      return Promise.reject(error);
+    }
+
+    console.error('响应错误：', error.response?.data || error.message);
     
     if (error.response) {
       // 服务器返回了错误状态码

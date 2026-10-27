@@ -1,0 +1,6 @@
+# Go 并发基础
+
+Goroutine 是由 Go 运行时调度的轻量级执行单元。使用 go 关键字可以启动 goroutine。
+Channel 用于 goroutine 之间的通信。无缓冲 channel 的发送与接收会同步；有缓冲 channel 在缓冲区未满时允许发送方继续执行。
+Context 常用于传递截止时间、取消信号和请求范围内的数据。调用 cancel 后，监听 Done channel 的任务应尽快退出。
+Mutex 用于保护共享内存，WaitGroup 用于等待一组 goroutine 完成。并发程序应使用 go test -race 检查数据竞争。
